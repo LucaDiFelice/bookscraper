@@ -5,7 +5,10 @@ url = "https://www.mlb.com/stats/"
 page = requests.get(url)
 soup = BeautifulSoup(page.text, features="html.parser")
 
-def top_player():
+def player_stat():
+    print("hi")
+
+def top_player(stat_type):
     stat_column = {
         "team": 1, 
         "G": 2, 
@@ -26,17 +29,11 @@ def top_player():
         "OPS": 17,
     }
     all_players = soup.find("tbody", class_="notranslate")
-    print(all_players.text)
     for player in all_players:
         player_name = player.find("a", class_="bui-link")
-        player_stat = player.find('td', {'data-col': '2'})
+        player_stat = player.find('td', {'data-col': stat_column[stat_type]})
         print(player_name["aria-label"])
         print(player_stat.text)
         print("")
 
-top_player()
-
-"""
-players = soup.find("th", scope="row")
-player = players.find("a", class_="bui-link")
-"""
+top_player("HR")
