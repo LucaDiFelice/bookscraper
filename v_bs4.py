@@ -10,7 +10,7 @@ player_page = requests.get(players)
 player_soup = BeautifulSoup(player_page.text, features="html.parser")
 
 def verify_player():
-    player_data = player_soup.find("div", class_="l-grid__col l-grid--one-column__col--middle l-grid__col--xs-12 l-grid__col--sm-12 l-grid__col--md-12 l-grid__col--lg-12 l-grid__col--xl-12")
+    player_data = player_soup.select("#players-index > div > div:nth-child(2) > ul")
     print(player_data)
 
 def top_player(stat_type):
