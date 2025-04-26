@@ -5,8 +5,13 @@ url = "https://www.mlb.com/stats/"
 page = requests.get(url)
 soup = BeautifulSoup(page.text, features="html.parser")
 
-def player_stat():
-    print("hi")
+players = "https://www.mlb.com/players"
+player_page = requests.get(players)
+player_soup = BeautifulSoup(player_page.text, features="html.parser")
+
+def verify_player():
+    player_data = player_soup.find("div", class_="l-grid__col l-grid--one-column__col--middle l-grid__col--xs-12 l-grid__col--sm-12 l-grid__col--md-12 l-grid__col--lg-12 l-grid__col--xl-12")
+    print(player_data)
 
 def top_player(stat_type):
     stat_column = {
@@ -36,4 +41,5 @@ def top_player(stat_type):
         print(player_stat.text)
         print("")
 
-top_player("HR")
+#top_player("HR")
+verify_player()
