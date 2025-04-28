@@ -10,7 +10,7 @@ player_page = requests.get(players)
 player_soup = BeautifulSoup(player_page.text, features="html.parser")
 
 def verify_player():
-    player_data = player_soup.select("#players-index > div > div:nth-child(2) > ul")
+    player_data = player_soup.find("div", class_="section_wrapper", id="all_players_")
     print(player_data)
 
 def top_player(stat_type):
@@ -41,5 +41,5 @@ def top_player(stat_type):
         print(player_stat.text)
         print("")
 
-top_player("HR")
-#verify_player()
+#top_player("HR")
+verify_player()
