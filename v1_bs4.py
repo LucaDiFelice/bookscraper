@@ -41,5 +41,5 @@ def top_player(stat_type):
         print(player_stat.text)
         print("")
 
-#top_player("HR")
-verify_player()
+top_player("HR")
+#verify_player()
