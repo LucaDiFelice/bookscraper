@@ -9,6 +9,7 @@ i = 0
 url = "https://www.baseball-reference.com/players/a/"
 page = requests.get(url)
 soup = BeautifulSoup(page.text, "lxml")
+print(page)
 #print(soup)
 
 #or letter in range(97, 123, 1):
