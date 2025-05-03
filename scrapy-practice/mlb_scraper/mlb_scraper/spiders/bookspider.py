@@ -14,3 +14,4 @@ class BookspiderSpider(scrapy.Spider):
                 "price" : book.css(".product_price .price_color::text").get(),
                 "url" : book.css("h3 a").attrib["href"],
             }
+    
