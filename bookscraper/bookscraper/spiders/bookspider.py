@@ -13,14 +13,6 @@ class BookspiderSpider(scrapy.Spider):
         }
     }
 
-    user_agent_list = [
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Geck)"
-        "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15"
-        "Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit",
-        "Mozilla/9.0 (Windows NT 10.0; Win64; x64) AppleWebKit",
-    ]
-
     def parse(self, response):
         books = response.css('article.product_pod')
         for book in books:
@@ -30,7 +22,7 @@ class BookspiderSpider(scrapy.Spider):
                 book_url = 'https://books.toscrape.com/' + relative_url
             else:
                 book_url = 'https://books.toscrape.com/catalogue/' + relative_url
-            yield response.follow(book_url, callback=self.parse_book_page, headers={"User-Agent": self.user_agent_list[randon.randint(0, len(self.user_agent_list) - 1)]})
+            yield response.follow(book_url, callback=self.parse_book_page)
 
         next_page = response.css('li.next a ::attr(href)').get()
         if next_page is not None:
@@ -38,7 +30,7 @@ class BookspiderSpider(scrapy.Spider):
                 next_page_url = 'https://books.toscrape.com/' + next_page
             else:
                 next_page_url = 'https://books.toscrape.com/catalogue/' + next_page
-            yield response.follow(next_page_url, callback=self.parse, headers={"User-Agent": self.user_agent_list[randon.randint(0, len(self.user_agent_list) - 1)]})
+            yield response.follow(next_page_url, callback=self.parse)
 
 
     def parse_book_page(self, response):
